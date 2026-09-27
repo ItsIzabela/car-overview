@@ -92,17 +92,20 @@ class Car:
                 print("Podaj poprawną liczbę.")
 
     def calculate_fuel_consumption(self):
+        if self.speed == 0:
+            return 0.0
+
         base_speed = 50
         base_consumption = self.fuel_waste
-        if self.speed == 0:
-            return 0
-        if self.speed > base_speed:
-            extra = ((self.speed - base_speed) // 10) * 0.5
-            return base_consumption + extra
-        else:
-            reduction = ((base_speed - self.speed) // 10) * 0.3
+
+        if self.speed <= base_speed:
+            reduction = (base_speed - self.speed) * 0.03
             consumption = base_consumption - reduction
-            return max(consumption, 2.0)
+        else:
+            increase = (self.speed - base_speed) * 0.05
+            consumption = base_consumption + increase
+
+        return max(consumption, 2.0)
 
     def calculate_fuel_usage_for_acceleration(self):
         return 0.3
