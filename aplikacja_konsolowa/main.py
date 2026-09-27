@@ -8,6 +8,7 @@ def clear_console():
     else:
         subprocess.run("clear", shell=True)
 
+
 class Car:
     def __init__(self, model="", car_year=0, car_weight=0.0, fuel=0.0, capacity=0.0, fuel_waste=0.0,
                  is_engine_on=False, are_lights_on=False, speed=0, is_accelerating=False, is_braking=False):
@@ -16,12 +17,13 @@ class Car:
         self.car_weight = car_weight
         self.fuel = fuel
         self.capacity = capacity
-        self.fuel_waste = fuel_waste # spalanie na 100km 
+        self.fuel_waste = fuel_waste
         self.is_engine_on = is_engine_on
         self.are_lights_on = are_lights_on
         self.speed = speed
         self.is_accelerating = is_accelerating
         self.is_braking = is_braking
+        self.distance = 0.0
 
     def show_car_status(self):
         print("--- Status pojazdu ---")
@@ -33,6 +35,7 @@ class Car:
         print(f"Czy silnik jest włączony: {self.is_engine_on}")
         print(f"Czy światła są włączone: {self.are_lights_on}")
         print(f"Prędkość auta: {self.speed} km/h")
+        print(f"Przejechany dystans: {self.distance:.3f} km")
         print(f"Szacowane zużycie paliwa: {self.calculate_fuel_consumption():.2f} l/100km")
         print("---")
 
@@ -50,44 +53,73 @@ class Car:
             self.are_lights_on = True
             print("Włączono światła")
 
+    def update_drive(self):
+        if not self.is_engine_on or self.speed <= 0:
+            return
+
+        distance = self.speed
+        fuel_used = (self.calculate_fuel_consumption() / 100) * distance
+
+        if self.fuel >= fuel_used:
+            self.distance += distance
+            self.fuel -= fuel_used
+        else:
+            print("Brak paliwa! Silnik gaśnie.")
+            self.fuel = 0
+            self.is_engine_on = False
+            self.speed = 0
+
     def accelerate(self):
         if not self.is_engine_on:
             print("Silnik jest wyłączony!")
             return
+
         self.is_accelerating = True
+
+        self.update_drive()
+
         self.speed += 10
-        fuel_used = self.calculate_fuel_usage_for_acceleration()
-        if self.fuel >= fuel_used:
-            self.fuel -= fuel_used
-            print(f"Przyśpieszono o 10 km/h. Twoja prędkość: {self.speed} km/h. Zużyto {fuel_used:.2f} l paliwa.")
-        else:
-            print("Brak paliwa na przyspieszenie! Silnik gaśnie.")
-            self.is_engine_on = False
-            self.speed = 0
+
+        print(f"Przyśpieszono o 10 km/h. Twoja prędkość: {self.speed} km/h")
 
     def brake(self):
+        if not self.is_engine_on:
+            print("Silnik jest wyłączony!")
+            return
+
         self.is_braking = True
+
+        self.update_drive()
+
         if self.speed >= 10:
             self.speed -= 10
             print(f"Zwolniono o 10 km/h. Twoja prędkość: {self.speed} km/h")
-        elif self.speed == 0:
+        elif self.speed > 0:
+            self.speed = 0
             print("Zatrzymano pojazd!")
+        else:
+            print("Pojazd już stoi.")
 
     def refuel(self):
         print(f"Ilość paliwa teraz: {self.fuel:.2f} l")
         print(f"Maksymalna pojemność baku: {self.capacity} l")
+
         while True:
             try:
                 tank = float(input("Ile chcesz zatankować (l): "))
+
                 if tank <= 0:
                     print("Podaj dodatnią wartość.")
                     continue
+
                 if self.fuel + tank <= self.capacity:
                     self.fuel += tank
-                    print(f"Zatankowano {tank:.2f} l paliwa. Aktualna ilość paliwa: {self.fuel:.2f} l")
+                    print(f"Zatankowano {tank:.2f} l paliwa.")
+                    print(f"Aktualna ilość paliwa: {self.fuel:.2f} l")
                     break
                 else:
                     print("Przekraczasz pojemność baku! Spróbuj ponownie.")
+
             except ValueError:
                 print("Podaj poprawną liczbę.")
 
@@ -107,17 +139,16 @@ class Car:
 
         return max(consumption, 2.0)
 
-    def calculate_fuel_usage_for_acceleration(self):
-        return 0.3
-
     def run(self):
         print("--- Wprowadź dane swojego pojazdu! ---")
+
         self.model = self.get_nonempty_string("Model auta: ")
         self.car_year = self.get_valid_int("Rok wyprodukowania auta: ", 1886, 2026)
         self.car_weight = self.get_valid_float("Waga auta (t): ", 0.5, 10.0)
         self.capacity = self.get_valid_float("Pojemność baku (l): ", 10, 200)
         self.fuel = self.get_valid_float("Ile jest teraz paliwa (l): ", 0, self.capacity)
         self.fuel_waste = self.get_valid_float("Spalanie na 100km (l): ", 2, 30)
+
         print("---")
 
         while True:
@@ -156,18 +187,22 @@ class Car:
     def get_nonempty_string(self, prompt):
         while True:
             s = input(prompt).strip()
+
             if s:
                 return s
+
             print("To pole nie może być puste.")
 
     def get_valid_int(self, prompt, min_val, max_val):
         while True:
             try:
                 val = int(input(prompt))
+
                 if min_val <= val <= max_val:
                     return val
-                else:
-                    print(f"Wprowadź liczbę z zakresu {min_val} - {max_val}.")
+
+                print(f"Wprowadź liczbę z zakresu {min_val} - {max_val}.")
+
             except ValueError:
                 print("Wprowadź poprawną liczbę całkowitą.")
 
@@ -175,12 +210,15 @@ class Car:
         while True:
             try:
                 val = float(input(prompt))
+
                 if min_val <= val <= max_val:
                     return val
-                else:
-                    print(f"Wprowadź liczbę z zakresu {min_val} - {max_val}.")
+
+                print(f"Wprowadź liczbę z zakresu {min_val} - {max_val}.")
+
             except ValueError:
                 print("Wprowadź poprawną liczbę.")
+
 
 if __name__ == "__main__":
     app = Car()
