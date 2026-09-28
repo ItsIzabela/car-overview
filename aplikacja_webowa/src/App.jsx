@@ -40,8 +40,8 @@ export default function App() {
       </div>
       <div id="tank-container">
         <ul>
-          <li>Ilość paliwa: {fuel}</li>
-          <li>Pojemność baku: {capacity}</li>
+          <li>Ilość paliwa: </li>
+          <li>Pojemność baku: </li>
           <li><label htmlFor="tank-info">Ile chcesz zatankować?</label> <input type="number" name="tank-ammount" id="tank-ammount" /></li>
         </ul>
         
