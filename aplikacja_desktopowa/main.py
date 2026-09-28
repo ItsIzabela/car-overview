@@ -46,9 +46,6 @@ class Car:
             self.is_accelerating = is_accelerating
             self.is_braking = is_braking
 
-            self.result = tk.Label(self.root, text="")
-            self.result.pack()
-
     def entry_view(self):
          model_value = self.model.get()
          car_year_value = self.car_year.get()
@@ -91,6 +88,9 @@ class Car:
 
          self.action_btn = tk.Button(self.root, text="Ok!", command=self.choice)
          self.action_btn.pack()         
+
+         self.result = tk.Label(self.root, text="hi")
+         self.result.pack()
 
     def view(self):
         self.submit_btn = tk.Button(self.root, text="Zatwierdź!", command=self.change_view)

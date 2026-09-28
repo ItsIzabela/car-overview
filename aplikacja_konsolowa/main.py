@@ -42,6 +42,8 @@ class Car:
     def turn_engine_on(self):
         if self.fuel <= 0:
             print("Musisz zatankować!")
+        elif self.is_engine_on == True:
+            print("Samochód już jest włączony! Nie można włączyć go drugi raz!")
         else:
             self.is_engine_on = True
             print("Włączono samochód")
@@ -72,6 +74,9 @@ class Car:
     def accelerate(self):
         if not self.is_engine_on:
             print("Silnik jest wyłączony!")
+            return
+        elif self.speed >= 250:
+            print("Ograniczono maksymalną prędkość!")
             return
 
         self.is_accelerating = True
