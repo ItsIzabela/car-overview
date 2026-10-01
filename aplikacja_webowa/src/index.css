@@ -1,19 +1,90 @@
-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(51, 45, 45, 0.637);
+* {
+  box-sizing: border-box;
 }
 
-#form-contener{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 300px;
-  width: 400px;
-  background-color: rgba(65, 54, 54, 0.479);
-  border-color: rgba(49, 40, 40, 0.479);
-  border-width: 100px;
-  border-radius: 50px;
+body {
+  margin: 0;
+  padding: 20px;
+  font-family: sans-serif;
+  background-color: #dbe8f7;
 }
+
+#root {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+h1 {
+  font-size: 28px;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+  background-color: #c8dbf7;
+  border: 1px solid #8fb4eb;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #b5cdf0;
+}
+
+input {
+  padding: 8px;
+  margin: 5px;
+  border: 1px solid #8fb4eb;
+}
+
+.app {
+  width: 100%;
+}
+
+.dashboard {
+  display: flex;
+  gap: 15px;
+}
+
+.dashboard section {
+  flex: 1;
+}
+
+.car-card,
+.info-card,
+.controls-card,
+.refuel-card,
+.setup-card {
+  padding: 15px;
+  margin: 10px 0;
+  background-color: #8fb4eb;
+  border: 1px solid #789fd8;
+}
+
+.car-image {
+  width: 300px;
+  max-width: 100%;
+}
+
+.controls-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.form-group {
+  margin: 10px;
+}
+
+.message {
+  padding: 10px;
+  margin: 10px;
+  background-color: #eee;
+  border: 1px solid #aaa;
+}
+
