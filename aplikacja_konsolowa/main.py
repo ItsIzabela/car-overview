@@ -156,15 +156,15 @@ class Car:
 
         while True:
             try:
-                tank = float(input("Ile chcesz zatankować (l): "))
+                self.tank = float(input("Ile chcesz zatankować (l): "))
 
-                if tank <= 0:
+                if self.tank <= 0:
                     print("Podaj dodatnią wartość.")
                     continue
 
-                if self.fuel + tank <= self.capacity:
-                    self.fuel += tank
-                    print(f"Zatankowano {tank:.2f} l paliwa.")
+                if self.fuel + self.tank <= self.capacity:
+                    self.fuel += self.tank
+                    print(f"Zatankowano {self.tank:.2f} l paliwa.")
                     print(f"Aktualna ilość paliwa: {self.fuel:.2f} l")
                     break
                 else:
