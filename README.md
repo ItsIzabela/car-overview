@@ -13,15 +13,17 @@
 ### Spis treści
 
 [Sterowanie samochodem](#sterowanie-samochodem)
-- [1. Opis działania aplikacji](#1-opis-działania-aplikacji)
-- [2. Funkcje aplikacji](#2-funkcje-aplikacji)
-- [3. Uruchamianie aplikacji](#3-uruchamianie-aplikacji)
+- [Sterowanie samochodem](#sterowanie-samochodem)
+    - [Spis treści](#spis-treści)
+  - [1. Opis działania aplikacji](#1-opis-działania-aplikacji)
+  - [2. Funkcje aplikacji](#2-funkcje-aplikacji)
+  - [3. Uruchamianie aplikacji](#3-uruchamianie-aplikacji)
   - [3.1 Aplikacja konsolowa](#31-aplikacja-konsolowa)
   - [3.2 Aplikacja desktopowa](#32-aplikacja-desktopowa)
   - [3.3 Aplikacja webowa](#33-aplikacja-webowa)
   - [3.4 Aplikacja mobilna](#34-aplikacja-mobilna)
-- [4. Zasady działania](#4-zasady-działania)
-- [5. Testy](#5-testy)
+  - [4. Zasady działania](#4-zasady-działania)
+  - [5. Testy](#5-testy)
 
 
 ## 1. Opis działania aplikacji
@@ -189,5 +191,3 @@ Sprawdzono między innymi:
 * blokadę przyspieszania bez uruchomionego trybu jazdy,
 * blokadę hamowania bez uruchomionego trybu jazdy,
 * blokadę skręcania bez uruchomionego trybu jazdy.
-
-```
