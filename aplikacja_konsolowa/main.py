@@ -149,6 +149,13 @@ class Car:
             print("Pojazd już stoi.")
 
     def refuel(self):
+        
+        if self.speed != 0:
+            print(f"Zatrzymaj auto aby móc zachamować")
+            return
+        
+        self.is_engine_on = False
+        self.are_lights_on = False
         self.update_drive()
 
         print(f"Ilość paliwa teraz: {self.fuel:.2f} l")
