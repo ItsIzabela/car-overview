@@ -367,6 +367,10 @@ class Car:
                 text="Pojazd już stoi."
             )
     def refuel_view(self):
+        if self.speed !=0:
+            self.result.configure(text=f"Zatrzymaj auto aby móc zatankować")
+            return
+        
         if hasattr(self, "refuel_drive_btn"):
             self.refuel_drive_btn.config(
                 state="disabled"
@@ -753,7 +757,7 @@ class Car:
 
 if __name__ == "__main__":
     root = tk.Tk()
-    root.geometry("800x900")
+    root.geometry("800x800")
     root.title(
         "Aplikacja obsługi samochodu"
     )

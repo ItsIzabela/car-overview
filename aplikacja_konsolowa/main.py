@@ -151,7 +151,7 @@ class Car:
     def refuel(self):
         
         if self.speed != 0:
-            print(f"Zatrzymaj auto aby móc zachamować")
+            print(f"Zatrzymaj auto aby móc zatankować")
             return
         
         self.is_engine_on = False
